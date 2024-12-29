@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Countdown</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: transparent;
+        }
+
+        .widget-container {
+            background-color: #191919;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            min-width: 300px;
+            border: 1px solid #333;
+        }
+
+        .project-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #FFFFFF;
+        }
+
+        .countdown {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #529CCA;
+        }
+
+        .time-unit {
+            display: inline-block;
+            margin: 0 5px;
+            color: #FFFFFF;
+        }
+
+        .separator {
+            color: #529CCA;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="widget-container">
+        <div class="project-title">Ken & Dill texbook</div>
+        <div class="countdown" id="countdown">
+            <span class="time-unit" id="days">--</span><span class="separator">d :</span>
+            <span class="time-unit" id="hours">--</span><span class="separator">h :</span>
+            <span class="time-unit" id="minutes">--</span><span class="separator">m :</span>
+            <span class="time-unit" id="seconds">--</span><span class="separator">s</span>
+        </div>
+    </div>
+
+    <script>
+        const TARGET_DATE = '2025-12-30 23:59:59';
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const targetDate = new Date(TARGET_DATE).getTime();
+            const timeDiff = targetDate - now;
+
+            if (timeDiff <= 0) {
+                document.getElementById('countdown').innerHTML = '<span style="color: #FFFFFF;">Project Completed!</span>';
+                return;
+            }
+
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+
+</html>
