@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Countdown</title>
+    <title>Ken & Dill Countdown</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -13,51 +13,82 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: transparent;
+            /* Match Notion dark mode background */
+            background-color: #2F3437;
         }
 
         .widget-container {
-            background-color: #191919;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background-color: #2F3437;
+            border-radius: 3px;
+            padding: 24px;
             text-align: center;
             min-width: 300px;
-            border: 1px solid #333;
         }
 
         .project-title {
-            font-size: 1.5em;
-            margin-bottom: 15px;
+            font-size: 1.2em;
+            margin-bottom: 20px;
             color: #FFFFFF;
+            font-weight: 500;
         }
 
         .countdown {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #529CCA;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .time-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .time-unit {
-            display: inline-block;
-            margin: 0 5px;
+            font-size: 2.5em;
             color: #FFFFFF;
+            margin-bottom: 4px;
+        }
+
+        .time-label {
+            font-size: 0.8em;
+            color: #999999;
+            text-transform: uppercase;
         }
 
         .separator {
-            color: #529CCA;
+            font-size: 2.5em;
+            color: #666666;
+            margin: 0 4px;
+            align-self: flex-start;
         }
     </style>
 </head>
 
 <body>
     <div class="widget-container">
-        <div class="project-title">Ken & Dill texbook</div>
+        <div class="project-title">Ken & Dill textbook</div>
         <div class="countdown" id="countdown">
-            <span class="time-unit" id="days">--</span><span class="separator">d :</span>
-            <span class="time-unit" id="hours">--</span><span class="separator">h :</span>
-            <span class="time-unit" id="minutes">--</span><span class="separator">m :</span>
-            <span class="time-unit" id="seconds">--</span><span class="separator">s</span>
+            <div class="time-block">
+                <span class="time-unit" id="days">--</span>
+                <span class="time-label">days</span>
+            </div>
+            <span class="separator">:</span>
+            <div class="time-block">
+                <span class="time-unit" id="hours">--</span>
+                <span class="time-label">hours</span>
+            </div>
+            <span class="separator">:</span>
+            <div class="time-block">
+                <span class="time-unit" id="minutes">--</span>
+                <span class="time-label">minutes</span>
+            </div>
+            <span class="separator">:</span>
+            <div class="time-block">
+                <span class="time-unit" id="seconds">--</span>
+                <span class="time-label">seconds</span>
+            </div>
         </div>
     </div>
 
@@ -70,7 +101,7 @@
             const timeDiff = targetDate - now;
 
             if (timeDiff <= 0) {
-                document.getElementById('countdown').innerHTML = '<span style="color: #FFFFFF;">Project Completed!</span>';
+                document.getElementById('countdown').innerHTML = '<span style="color: #FFFFFF; font-size: 2em;">Completed!</span>';
                 return;
             }
 
